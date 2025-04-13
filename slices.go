@@ -31,3 +31,15 @@ func Join[S1 ~[]T1, S2 ~[]T2, T1, T2 any](s1 S1, s2 S2) []Pair[T1, T2] {
 
 	return res
 }
+
+func Filter[S ~[]T, T any](s S, filter func(T) bool) S {
+	res := make(S, 0)
+
+	for _, si := range s {
+		if filter(si) {
+			res = append(res, si)
+		}
+	}
+
+	return res
+}
