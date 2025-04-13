@@ -43,3 +43,13 @@ func Filter[S ~[]T, T any](s S, filter func(T) bool) S {
 
 	return res
 }
+
+func CollectMap[M ~map[K]V, K comparable, V any](m M) []Pair[K, V] {
+	res := make([]Pair[K, V], 0, len(m))
+
+	for key, val := range m {
+		res = append(res, Pair[K, V]{key, val})
+	}
+
+	return res
+}
