@@ -25,6 +25,14 @@ func FilterMap[S ~[]FromT, FromT, ToT any](s S, f func(FromT) (ToT, bool)) []ToT
 	return res
 }
 
+func Reduce[S ~[]T, T, V any](val V, s S, reducer func(val V, elem T) V) V {
+	for _, si := range s {
+		val = reducer(val, si)
+	}
+
+	return val
+}
+
 type Pair[T1, T2 any] struct {
 	First  T1
 	Second T2
