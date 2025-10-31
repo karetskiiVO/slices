@@ -11,6 +11,20 @@ func Map[S ~[]FromT, FromT, ToT any](s S, f func(FromT) ToT) []ToT {
 	return res
 }
 
+func FilterMap[S ~[]FromT, FromT, ToT any](s S, f func(FromT) (ToT, bool)) []ToT {
+	res := make([]ToT, 0, len(s))
+	for _, si := range s {
+		buf, ok := f(si)
+		if !ok {
+			continue
+		}
+
+		res = append(res, buf)
+	}
+
+	return res
+}
+
 type Pair[T1, T2 any] struct {
 	First  T1
 	Second T2
